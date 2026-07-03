@@ -1,0 +1,7 @@
+# Namoza Developer Assignment — [Tumhara Naam]
+
+- Task 1: [task1-gtm-schema.md](./task1-gtm-schema.md)
+- Task 2: [task2-landing-page/index.html](./task2-landing-page/index.html) — live: [deployed URL yahan daalo]
+- Task 3: [task3-integration.md](./task3-integration.md)
+
+PageSpeed screenshot: [screenshot file ka link]
