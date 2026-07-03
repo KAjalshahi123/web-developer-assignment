@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Mobile-first viewport, no external font/CSS/JS requests -> keeps CWV / PageSpeed high -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book an Orthopaedic Consultation in Bengaluru | OrthoNow</title>
+<meta name="description" content="Get an expert orthopaedic opinion for knee or back pain. Book a consultation at OrthoNow's Bengaluru clinics.">
+
+<!--
+  GTM CONTAINER SNIPPET GOES HERE (head)
+  Left as a placeholder comment intentionally — in production this is the client's
+  real GTM-XXXXXXX container ID. Not hardcoding a fake ID to avoid confusion in review.
+  <script>(function(w,d,s,l,i){...})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+-->
+
+<style>
+  /* System font stack only — zero font download, zero layout shift from web fonts */
+  :root{
+    --ink:#1a2b3c;
+    --ink-soft:#4a5a6a;
+    --brand:#0e6b5c;
+    --brand-dark:#0a4d42;
+    --bg:#fbfaf7;
+    --card:#ffffff;
+    --border:#e4e1d8;
+    --danger:#c0392b;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:1100px; margin:0 auto; padding:0 20px;}
+
+  /* ---------- Top trust bar: builds credibility before headline even loads attention ---------- */
+  .trustbar{
+    background:var(--brand-dark);
+    color:#fff;
+    font-size:13px;
+    text-align:center;
+    padding:8px 12px;
+    font-weight:500;
+  }
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    padding:36px 0 28px;
+  }
+  .hero-grid{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+  }
+  h1{
+    font-size:clamp(26px, 6vw, 40px);
+    line-height:1.15;
+    color:var(--ink);
+    font-weight:800;
+    letter-spacing:-0.5px;
+  }
+  h1 span{color:var(--brand);}
+  .sub{
+    margin-top:14px;
+    font-size:17px;
+    color:var(--ink-soft);
+    max-width:52ch;
+  }
+
+  /* Credential chips — the "trust element" requirement, no images needed (SVG inline, tiny) */
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+  }
+  .chip{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:var(--card);
+    border:1px solid var(--border);
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink-soft);
+  }
+  .chip svg{width:15px; height:15px; flex-shrink:0; color:var(--brand);}
+
+  /* ---------- Form card ---------- */
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:24px;
+    box-shadow:0 4px 20px rgba(20,30,40,0.06);
+  }
+  .card h2{
+    font-size:19px;
+    margin-bottom:4px;
+  }
+  .card .card-sub{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-bottom:18px;
+  }
+  label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:6px;
+  }
+  .field{margin-bottom:16px;}
+  input[type="text"], input[type="tel"]{
+    width:100%;
+    padding:13px 14px;
+    font-size:16px; /* 16px prevents iOS auto-zoom on focus */
+    border:1.5px solid var(--border);
+    border-radius:9px;
+    background:#fff;
+    color:var(--ink);
+  }
+  input:focus{
+    outline:none;
+    border-color:var(--brand);
+  }
+  .error-msg{
+    color:var(--danger);
+    font-size:12px;
+    margin-top:5px;
+    display:none;
+  }
+  .field.has-error input{border-color:var(--danger);}
+  .field.has-error .error-msg{display:block;}
+
+  button.cta{
+    width:100%;
+    background:var(--brand);
+    color:#fff;
+    border:none;
+    padding:15px 18px;
+    font-size:16px;
+    font-weight:700;
+    border-radius:9px;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  button.cta:active{background:var(--brand-dark);}
+  .microcopy{
+    text-align:center;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:10px;
+  }
+
+  /* ---------- Thank-you state (shown after submit, no reload) ---------- */
+  .thankyou{display:none; text-align:center; padding:20px 6px;}
+  .thankyou svg{width:48px; height:48px; color:var(--brand); margin-bottom:12px;}
+  .thankyou h2{font-size:20px; margin-bottom:6px;}
+  .thankyou p{font-size:14px; color:var(--ink-soft);}
+
+  /* ---------- Layout at wider screens ---------- */
+  @media (min-width:760px){
+    .hero-grid{
+      flex-direction:row;
+      align-items:center;
+      gap:40px;
+    }
+    .hero-grid > .copy{flex:1.15;}
+    .hero-grid > .card{flex:1; align-self:stretch;}
+  }
+
+  /* ---------- Sticky mobile CTA bar (mobile-native feel, not desktop shrunk) ---------- */
+  .sticky-cta{
+    display:none;
+    position:fixed;
+    left:0; right:0; bottom:0;
+    background:#fff;
+    border-top:1px solid var(--border);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    z-index:50;
+    box-shadow:0 -4px 16px rgba(0,0,0,0.06);
+  }
+  .sticky-cta button{
+    width:100%;
+    background:var(--brand);
+    color:#fff;
+    border:none;
+    padding:13px;
+    font-size:15px;
+    font-weight:700;
+    border-radius:9px;
+  }
+  @media (max-width:759px){
+    .sticky-cta{display:block;}
+    body{padding-bottom:70px;} /* room for sticky bar */
+  }
+
+  footer{
+    text-align:center;
+    font-size:12px;
+    color:var(--ink-soft);
+    padding:24px 20px 40px;
+  }
+</style>
+</head>
+<body>
+
+<!-- GTM (noscript) placeholder -->
+<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+
+<div class="trustbar">Trusted by 40,000+ patients across 9 clinics in Bengaluru, Hyderabad &amp; Chennai</div>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+
+    <div class="copy">
+      <h1>Still ignoring that <span>knee or back pain</span>? Get an expert opinion this week.</h1>
+      <p class="sub">
+        One conversation with an OrthoNow orthopaedic specialist can tell you exactly what's
+        going on — and whether it needs treatment, physio, or just a change in habits.
+        No obligation, no waiting weeks for an appointment.
+      </p>
+
+      <div class="chips">
+        <div class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          MBBS/MS Orthopaedic Specialists
+        </div>
+        <div class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M9 13h1M14 9h1M14 13h1"/></svg>
+          9 Clinics — Bengaluru, Hyderabad, Chennai
+        </div>
+        <div class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.6L21 9l-5 4.6L17.4 21 12 17.3 6.6 21 8 13.6 3 9l6.6-.4z"/></svg>
+          4.7/5 from 3,200+ patient reviews
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="formCard">
+
+      <!-- FORM STATE -->
+      <div id="formState">
+        <h2>Book your consultation</h2>
+        <p class="card-sub">Takes 15 seconds. A clinic coordinator will call you back to confirm a slot.</p>
+
+        <form id="consultForm" novalidate>
+          <div class="field" id="nameField">
+            <label for="name">Your name</label>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="e.g. Ramesh Gowda">
+            <div class="error-msg">Please enter your name.</div>
+          </div>
+
+          <div class="field" id="phoneField">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="numeric" placeholder="10-digit mobile number" maxlength="10">
+            <div class="error-msg">Please enter a valid 10-digit mobile number.</div>
+          </div>
+
+          <button type="submit" class="cta">Book My Consultation</button>
+          <p class="microcopy">We'll call you back within business hours. No spam, ever.</p>
+        </form>
+      </div>
+
+      <!-- THANK-YOU STATE (swapped in via JS, no reload) -->
+      <div class="thankyou" id="thankYouState">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        <h2>Request received</h2>
+        <p>A clinic coordinator will call you within business hours to confirm your slot.</p>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<footer class="wrap">
+  OrthoNow is a growth &amp; strategy partner engagement operated with Namoza. This is a campaign landing page.
+</footer>
+
+<!-- Sticky CTA for mobile — scrolls form into view instead of duplicating it -->
+<div class="sticky-cta">
+  <button type="button" id="stickyBtn">Book My Consultation</button>
+</div>
+
+<script>
+  // Keep window.dataLayer safe even if GTM snippet above isn't wired up yet in this sandbox copy
+  window.dataLayer = window.dataLayer || [];
+
+  var form = document.getElementById('consultForm');
+  var nameField = document.getElementById('name');
+  var phoneField = document.getElementById('phone');
+  var nameWrap = document.getElementById('nameField');
+  var phoneWrap = document.getElementById('phoneField');
+  var formState = document.getElementById('formState');
+  var thankYouState = document.getElementById('thankYouState');
+  var stickyBtn = document.getElementById('stickyBtn');
+
+  // Sticky mobile button just focuses the real form — avoids a second fake form / duplicate logic
+  stickyBtn.addEventListener('click', function () {
+    document.getElementById('formCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    nameField.focus();
+  });
+
+  // Only allow digits in phone field as the user types (better mobile UX than validating after the fact)
+  phoneField.addEventListener('input', function () {
+    this.value = this.value.replace(/\D/g, '').slice(0, 10);
+  });
+
+  function isValidPhone(val) {
+    return /^[6-9]\d{9}$/.test(val); // Indian mobile numbers: 10 digits, starts 6-9
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // critical: no real page reload, this is an SPA-style submit
+
+    var nameVal = nameField.value.trim();
+    var phoneVal = phoneField.value.trim();
+    var valid = true;
+
+    if (nameVal.length < 2) {
+      nameWrap.classList.add('has-error');
+      valid = false;
+    } else {
+      nameWrap.classList.remove('has-error');
+    }
+
+    if (!isValidPhone(phoneVal)) {
+      phoneWrap.classList.add('has-error');
+      valid = false;
+    } else {
+      phoneWrap.classList.remove('has-error');
+    }
+
+    if (!valid) return;
+
+    // ---- THE REQUIRED DATALAYER PUSH: fires on successful submit, never on page load ----
+    window.dataLayer.push({
+      event: 'consultation_form_submitted',
+      lead_source: 'google_ads_consultation_landing_page',
+      clinic_city: 'bengaluru',
+      form_location: 'hero_card'
+    });
+
+    // In production: this is where a fetch() call to the backend / HubSpot Forms API would go,
+    // e.g. fetch('/api/submit-consultation', { method:'POST', body: JSON.stringify({name:nameVal, phone:phoneVal}) })
+    // Left out here since Task 2 only requires the front-end + dataLayer push; Task 3 covers that architecture.
+
+    formState.style.display = 'none';
+    thankYouState.style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
